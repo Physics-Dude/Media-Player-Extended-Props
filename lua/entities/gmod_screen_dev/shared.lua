@@ -3,17 +3,21 @@
 AddCSLuaFile()
 
 DEFINE_BASECLASS( "mediaplayer_base" )
-ENT.PrintName 		= "Test TV"
-ENT.Author 			= "Physics Dude"
-ENT.Instructions 	= "Right click on the TV to see available Media Player options. Alternatively, press E on the TV to turn it on."
-ENT.Category 		= "Other"
-ENT.Type = "anim"
-ENT.Base = "mediaplayer_base"
-ENT.Model = Model( "models/props_lab/huladoll.mdl" )
-ENT.OBMin = Vector(-3,-9, -0.5)
-ENT.OBMax = Vector( 3, 9, 15.5)
-ENT.RenderGroup = RENDERGROUP_BOTH
-ENT.Spawnable = true
+
+ENT.PrintName      = "Test TV"
+ENT.Author         = "Physics Dude"
+ENT.Instructions   = "Right click on the TV to see available Media Player options. "
+											.." Alternatively, press E on the TV to turn it on."
+ENT.Category 		   = "Other"
+ENT.Type           = "anim"
+ENT.Information    = "Development doll TV"
+ENT.Base           = "mediaplayer_base"
+ENT.Model          = Model( "models/props_lab/huladoll.mdl" )
+ENT.OBMin          = Vector(-3,-9, -0.5)
+ENT.OBMax          = Vector( 3, 9, 15.5)
+ENT.RenderGroup    = RENDERGROUP_BOTH
+ENT.Spawnable      = true
+ENT.AdminSpawnable = true
 
 --[[----------------------------------- MAGIC sauce for testing new models rapidly  -----------------------------------]]--
 
@@ -56,7 +60,7 @@ if SERVER then
 
 	function ENT:SpawnFunction(ply, tr)
 	  if(not tr.Hit) then return end
-	  local ent = ents.Create("gmod_custom_dev")
+	  local ent = ents.Create("gmod_screen_dev")
 	  if(ent and ent:IsValid()) then
 	    ent:EnableCustomCollisions(true)
 	    ent:SetCustomCollisionCheck(true)
@@ -100,10 +104,10 @@ else -- CLIENT
 
 		local mp = self:GetMediaPlayer()
 
-		if not mp then
-			self:DrawMediaPlayerOff()
+		if mp then
+			mp:Draw()
 		else
-			mp:Draw(true, true)
+			self:DrawMediaPlayerOff()
 		end
 	end
 
