@@ -1,27 +1,24 @@
 AddCSLuaFile()
 
 -- I have no idea if half this stuff matters, nor if I'm missing something critical.
-local MediaPlayerClass = "mediaplayer_tv"
 DEFINE_BASECLASS( "mediaplayer_base" )
+
 local function AddMediaPlayerModel( name, model, confug)
-	if util.IsValidModel(model) then
-		local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
-		list.Set( "SpawnableEntities", spawnName, {
-			PrintName = name,
-			ClassName = MediaPlayerClass,
-			Category = "Media Player - Extended",
-			Type = "anim",
-			Base = "mediaplayer_base",
-			Author 	= "Physics Dude",
-			Spawnable = true,
-			Instructions = "Right click on the TV to see available Media Player options. Alternatively, press E on the TV to turn it on.",
-			DropToFloor = true,
-			KeyValues = {
-				model = model
-			}
-		} )
-		list.Set( "MediaPlayerModelConfigs", model, confug )
-	end
+	local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
+	list.Set( "SpawnableEntities", spawnName, {
+		PrintName = name,
+		ClassName = "mediaplayer_tv",
+		Category = "Media Player - Extended",
+		Type = "anim",
+		Base = "mediaplayer_base",
+		Author 	= "Physics Dude",
+		Spawnable = true,
+		DropToFloor = true,
+		KeyValues = { model = model },
+		Instructions = "Right click on the TV to see available Media Player options."
+			.." Alternatively, press E on the TV to turn it on."
+	} )
+	list.Set( "MediaPlayerModelConfigs", model, confug )
 end
 
 --[[TV-esque models from Garry's Mod "Bulder" props]]--
