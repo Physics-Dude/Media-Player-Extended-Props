@@ -1,9 +1,13 @@
 AddCSLuaFile()
 
+-- Server tells the clients what value to use
+local gnServCtrl = bit.bor(FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_PRINTABLEONLY, FCVAR_REPLICATED)
+local varAutoAng = CreateConVar("mediaplayer_extended_cormdl", 1, gnServCtrl, "Enable or disable automatic angle correction")
+
 -- I have no idea if half this stuff matters, nor if I'm missing something critical.
 DEFINE_BASECLASS( "mediaplayer_base" )
 
-local function AddMediaPlayerModel( name, model, confug)
+local function AddMediaPlayerModel( name, model, config)
 	local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
 	list.Set( "SpawnableEntities", spawnName, {
 		PrintName      = name,
@@ -19,7 +23,11 @@ local function AddMediaPlayerModel( name, model, confug)
 		Instructions   = "Right click on the TV to see available Media Player options."
 		  .." Alternatively, press E on the TV to turn it on."
 	} )
-	list.Set( "MediaPlayerModelConfigs", model, confug )
+
+	-- Make a difference between regular models and extended models
+	config.extended = true
+
+	list.Set( "MediaPlayerModelConfigs", model, config )
 end
 
 --[[TV-esque models from Garry's Mod "Bulder" props]]--
@@ -574,7 +582,7 @@ AddMediaPlayerModel( --sprops
 	"[SProps] Small 12x18",
 	"models/sprops/rectangles/size_2/rect_12x18x3.mdl",
 	{
-		angle = Angle(0, 180, 0),
+		angle = Angle(0, -180, 0),
 		offset = Vector(9, 6, 1.75), -- Forward/Back | Left/Right | Up/Down 
 		width = 18,
 		height = 12
@@ -584,7 +592,7 @@ AddMediaPlayerModel( --sprops
 	"[SProps] Small 24x36",
 	"models/sprops/rectangles/size_3/rect_24x36x3.mdl",
 	{
-		angle = Angle(0, 180, 0),
+		angle = Angle(0, -180, 0),
 		offset = Vector(18, 12, 1.75), -- Forward/Back | Left/Right | Up/Down 
 		width = 36,
 		height = 24
@@ -662,22 +670,50 @@ AddMediaPlayerModel( --sprops
 )
 
 if SERVER then
-    -- rotate mediaplayer toward player. this also fixes base mediaplayer behavior. requested by cyan.
-	hook.Add( "PlayerSpawnedSENT", "MediaPlayer.SetOwner", function(ply, ent)
-		if not ent.IsMediaPlayerEntity then return end
+
+	-- Prop coordinate system can be seen by utilizing `picker 1` command
+	local function SetSpawnAngle(ent, ply)
+		local cnf = list.GetForEdit("MediaPlayerModelConfigs")
+		local ang = ply:GetAimVector():Angle()
+		local mod = ent:GetModel()
+		if(cnf and cnf[mod]) then
+			local anc = cnf[mod].angle
+			if(anc and varAutoAng:GetBool()) then -- Screen angle correction
+				-- [-90:90:0] Angle of the X+ `RED` pointing player
+				ang.p = ang.p + anc.p + 90 -- No change for pitch
+				ang.y = ang.y + anc.y - 90 -- No change for yaw
+			end -- Compensate screen orientation
+		end -- Update roll and pitch to zeros
+		ang.p, ang.r = 0, 0 -- [0;360] > [0:180;-180;0]
+		ang.y = (ang.y > 180 and (ang.y - 360) or ang.y)
+		ang.y = (ang.y + 180); ang:Normalize(); ent:SetAngles(ang)
+	end
+
+	local function SetSpawnPosition(ent, ply)
+		-- Populate this with custom screen positioning
+	end
+
+    -- Place mediaplayer toward player. this also fixes base mediaplayer behavior. requested by cyan.
+    hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" )
+	hook.Add( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup", function(ply, ent)
+		if(not ent.IsMediaPlayerEntity) then return end
+		local mod = ent:GetModel() -- Model is the list index hash
+		local cnf = list.GetForEdit("MediaPlayerModelConfigs")[mod]
 		
-		-- fix for media player owner not getting set on alternate model spawn
+		-- Do nothing for other models and setup only ours
+		if(not cnf.extended) then return end
+
+		-- Fix for media player owner not getting set on alternate model spawn
 		ent:SetCreator(ply)
+
 		local mp = ent:GetMediaPlayer()
-		mp:SetOwner(ply)
+		if(mp) then mp:SetOwner(ply) end
 		
-		if AdvDupe2 ~= nil then
-			if(ply.AdvDupe2.Pasting or ply.AdvDupe2.Downloading)then return end -- dont rotate when pasting dupe
+		if(ply.AdvDupe2) then -- Do not rotate when pasting dupe
+			if(ply.AdvDupe2.Pasting or ply.AdvDupe2.Downloading) then return end
 		end
-		local Angles = ply:GetAngles()
-		Angles.pitch = 0
-		Angles.roll = 0
-		Angles.yaw = Angles.yaw + 180
-		ent:SetAngles( Angles )
+
+		SetSpawnAngle(ent, ply)
+		SetSpawnPosition(ent, ply)
 	end )
 end
