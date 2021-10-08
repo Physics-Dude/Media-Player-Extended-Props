@@ -6,17 +6,18 @@ DEFINE_BASECLASS( "mediaplayer_base" )
 local function AddMediaPlayerModel( name, model, confug)
 	local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
 	list.Set( "SpawnableEntities", spawnName, {
-		PrintName = name,
-		ClassName = "mediaplayer_tv",
-		Category = "Media Player - Extended",
-		Type = "anim",
-		Base = "mediaplayer_base",
-		Author 	= "Physics Dude",
-		Spawnable = true,
-		DropToFloor = true,
-		KeyValues = { model = model },
-		Instructions = "Right click on the TV to see available Media Player options."
-			.." Alternatively, press E on the TV to turn it on."
+		PrintName      = name,
+		Spawnable      = true,
+		AdminSpawnable = true,
+		DropToFloor    = true,
+		Type           = "anim",
+		Author         = "Physics Dude",
+		KeyValues      = { model = model },
+		ClassName      = "mediaplayer_tv",
+		Base           = "mediaplayer_base",
+		Category       = "Media Player - Extended",
+		Instructions   = "Right click on the TV to see available Media Player options."
+		  .." Alternatively, press E on the TV to turn it on."
 	} )
 	list.Set( "MediaPlayerModelConfigs", model, confug )
 end
