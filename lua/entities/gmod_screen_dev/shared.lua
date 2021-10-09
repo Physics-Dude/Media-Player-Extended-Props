@@ -12,13 +12,13 @@ ENT.Category       = "Other"
 ENT.Type           = "anim"
 ENT.Information    = "Development doll TV"
 ENT.Base           = "mediaplayer_base"
-ENT.Model          = Model( "models/props_lab/huladoll.mdl" )
 ENT.RenderGroup    = RENDERGROUP_BOTH
-ENT.Spawnable      = true
+ENT.Spawnable      = false
 ENT.AdminSpawnable = true
 
 --[[--------------------- MAGIC sauce for testing new models rapidly  -----------------------]]--
 
+ENT.Model = Model( "models/props_lab/huladoll.mdl" )
 list.Set( "MediaPlayerModelConfigs", ENT.Model, {
 		angle = Angle(-90, 90, 0),
 		offset = Vector(0,8,15),-- Forward/Back | Left/Right | Up/Down 
