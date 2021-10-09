@@ -8,26 +8,28 @@ local varAutoAng = CreateConVar("mediaplayer_extended_cormdl", 1, gnServCtrl, "E
 DEFINE_BASECLASS( "mediaplayer_base" )
 
 local function AddMediaPlayerModel( name, model, config)
-	local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
-	list.Set( "SpawnableEntities", spawnName, {
-		PrintName      = name,
-		Spawnable      = true,
-		AdminSpawnable = true,
-		DropToFloor    = true,
-		Type           = "anim",
-		Author         = "Physics Dude",
-		KeyValues      = { model = model },
-		ClassName      = "mediaplayer_tv",
-		Base           = "mediaplayer_base",
-		Category       = "Media Player - Extended",
-		Instructions   = "Right click on the TV to see available Media Player options."
-		  .." Alternatively, press E on the TV to turn it on."
-	} )
+	if util.IsValidModel( model ) then
+		local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
+		list.Set( "SpawnableEntities", spawnName, {
+			PrintName      = name,
+			Spawnable      = true,
+			AdminSpawnable = true,
+			DropToFloor    = true,
+			Type           = "anim",
+			Author         = "Physics Dude",
+			KeyValues      = { model = model },
+			ClassName      = "mediaplayer_tv",
+			Base           = "mediaplayer_base",
+			Category       = "Media Player - Extended",
+			Instructions   = "Right click on the TV to see available Media Player options."
+			  .." Alternatively, press E on the TV to turn it on."
+		} )
 
-	-- Make a difference between regular models and extended models
-	config.extended = true
+		-- Make a difference between regular models and extended models
+		config.extended = true
 
-	list.Set( "MediaPlayerModelConfigs", model, config )
+		list.Set( "MediaPlayerModelConfigs", model, config )
+	end
 end
 
 --[[TV-esque models from Garry's Mod "Bulder" props]]--
@@ -822,7 +824,6 @@ AddMediaPlayerModel( --Fallout 4: Devices pack
 		height = 50
 	}
 )
-
 
 if SERVER then
 
