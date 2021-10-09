@@ -522,7 +522,7 @@ AddMediaPlayerModel( --stevventechno
 	}
 )
 AddMediaPlayerModel( --stevventechno
-	"(Steventechno) Retro TV",
+	"(Steventechno) Retro",
 	"models/electronicspack/general_electronics/tv/crt/0_2_tv_small.mdl",
 	{
 		angle = Angle(-90, 90, 0),
@@ -688,6 +688,141 @@ AddMediaPlayerModel( --sprops
 		height = 288
 	}
 )
+
+--[[TV-esque models from "1950s Pack" and "1950s Pack 2"]]--
+AddMediaPlayerModel( --1950s 2
+	"(1950s Pack) Small TV",
+	"models/polievka/televisionsmall.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(12,11,22),-- Forward/Back | Left/Right | Up/Down 
+		width = 22,
+		height = 18
+	}
+)
+AddMediaPlayerModel( --1950s
+	"(1950s Pack) Big TV",
+	"models/polievka/televisionpolievka.mdl",
+	{
+		angle = Angle(90, -90, 0),
+		offset = Vector(-20.5,11,41.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 20,
+		height = 20
+	}
+)
+AddMediaPlayerModel( --1950s
+	"(1950s Pack) HiFi",
+	"models/polievka/1950shifi.mdl",
+	{
+		angle = Angle(0, 90, 0),
+		offset = Vector(-8,19,15.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 16,
+		height = 9
+	}
+)
+AddMediaPlayerModel( --1950s
+	"(1950s Pack) Radio",
+	"models/polievka/radiopolievka.mdl",
+	{
+		angle = Angle(180, 0, -90),
+		offset = Vector(3,-7.25,-1.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 6,
+		height = 3
+	}
+)
+AddMediaPlayerModel( --1950s
+	"(1950s Pack) Radio 2",
+	"models/polievka/radiosquare.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(4.1,3.2,-1.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 6.4,
+		height = 3.5
+	}
+)
+
+--[[TV-esque models from "Fallout 4: Devices pack"]]--
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Round TV",
+	"models/props/hightechtv01.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(10,10.5,48),-- Forward/Back | Left/Right | Up/Down 
+		width = 21,
+		height = 16.5
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Terminal",
+	"models/props/insterminal01.mdl",
+	{
+		angle = Angle(-90, 90, -8),
+		offset = Vector(4.8,4.3-0.5,21-0.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 8,
+		height = 8
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Terminal2",
+	"models/props/insterminalonwall.mdl",
+	{
+		angle = Angle(-90, 90, -8),
+		offset = Vector(10.8,4.3-0.5,33.5-0.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 8,
+		height = 8
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Radio",
+	"models/props/prewarradio.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(7.5,1.5,9.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 3,
+		height = 2
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) TV",
+	"models/props/prewartv01.mdl",
+	{
+		angle = Angle(-90, 89, 0),
+		offset = Vector(6,8,53),-- Forward/Back | Left/Right | Up/Down 
+		width = 16,
+		height = 12
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) TV 2",
+	"models/props/prewartv02.mdl",
+	{
+		angle = Angle(-90, 89, 0),
+		offset = Vector(6,8,29),-- Forward/Back | Left/Right | Up/Down 
+		width = 16,
+		height = 12
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Flatscreen",
+	"models/props/insflatscreen01.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(0.5,24.5,27.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 49,
+		height = 26
+	}
+)
+AddMediaPlayerModel( --Fallout 4: Devices pack
+	"(Fallout 4) Flatscreen2",
+	"models/props/insflatscreen02.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(0.5,24.5,52),-- Forward/Back | Left/Right | Up/Down 
+		width = 49,
+		height = 50
+	}
+)
+
 
 if SERVER then
 
