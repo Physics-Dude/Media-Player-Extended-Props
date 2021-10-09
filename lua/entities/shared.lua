@@ -511,6 +511,16 @@ AddMediaPlayerModel( --stevventechno
 		height = 12
 	}
 )
+AddMediaPlayerModel( --stevventechno
+	"(Steventechno) Retro TV",
+	"models/electronicspack/general_electronics/tv/crt/0_2_tv_small.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(-1,15,26),-- Forward/Back | Left/Right | Up/Down 
+		width = 30,
+		height = 21.5
+	}
+)
 
 --[[TV-esque models from "RolePlay Props Extended"]]--
 AddMediaPlayerModel( --other
