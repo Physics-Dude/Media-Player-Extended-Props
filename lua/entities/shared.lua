@@ -348,6 +348,16 @@ AddMediaPlayerModel( --other
 		height = 36
 	}
 )
+AddMediaPlayerModel( --other
+	"(GMod) Big TV Console",
+	"models/props/cs_militia/television_console01.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(13.5,22,55.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 44,
+		height = 33
+	}
+)
 AddMediaPlayerModel( --gmod
 	"(GMod) PC Monitor",
 	"models/props_office/computer_monitor_01.mdl",
