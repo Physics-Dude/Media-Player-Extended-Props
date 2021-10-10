@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 -- Server tells the clients what value to use
 local gnServCtrl = bit.bor(FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_PRINTABLEONLY, FCVAR_REPLICATED)
-local varAutoAng = CreateConVar("mediaplayer_extended_cormdl", 1, gnServCtrl, "Enable or disable automatic angle correction")
+local varAutoAng = CreateConVar("mediaplayer_extended_cormdl", 0, gnServCtrl, "Enable or disable automatic angle correction")
 
 -- I have no idea if half this stuff matters, nor if I'm missing something critical.
 DEFINE_BASECLASS( "mediaplayer_base" )
@@ -18,7 +18,7 @@ local function AddMediaPlayerModel( name, model, config)
 			Type           = "anim",
 			Author         = "Physics Dude",
 			KeyValues      = { model = model },
-			ClassName      = "mediaplayer_tv",
+			ClassName      = "mediaplayer_tv_ext",
 			Base           = "mediaplayer_base",
 			Category       = "Media Player - Extended",
 			Instructions   = "Right click on the TV to see available Media Player options."
