@@ -8,9 +8,9 @@ ENT.PrintName      = "Test TV"
 ENT.Author         = "Physics Dude"
 ENT.Instructions   = "Right click on the TV to see available Media Player options. "
                     .." Alternatively, press E on the TV to turn it on."
-ENT.Category       = "Other"
+ENT.Category       = "Media Player - Extended"
 ENT.Type           = "anim"
-ENT.Information    = "Development doll TV"
+ENT.Information    = "Development TV"
 ENT.Base           = "mediaplayer_base"
 ENT.RenderGroup    = RENDERGROUP_BOTH
 ENT.Spawnable      = false
