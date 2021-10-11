@@ -825,6 +825,28 @@ AddMediaPlayerModel( --Fallout 4: Devices pack
 	}
 )
 
+--[[TV-esque models from "Retro Television" pack]]--
+AddMediaPlayerModel( --Retro
+	"(Retro TV) Small TV",
+	"models/retrotelevision/retromonitor.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(5.5,7.25,23.5),-- Forward/Back | Left/Right | Up/Down 
+		width = 15,
+		height = 10
+	}
+)
+AddMediaPlayerModel( --Retro
+	"(Retro TV) Big TV",
+	"models/retrotelevision/retrostandingmonitor.mdl",
+	{
+		angle = Angle(-90, 90, 0),
+		offset = Vector(5.5,7.25,49),-- Forward/Back | Left/Right | Up/Down 
+		width = 15,
+		height = 10
+	}
+)
+
 if SERVER then
 
 	-- Prop coordinate system can be seen by utilizing `picker 1` command
