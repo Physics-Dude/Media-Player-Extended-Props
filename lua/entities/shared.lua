@@ -7,6 +7,28 @@ local varAutoAng = CreateConVar("mediaplayer_extended_cormdl", 0, gnServCtrl, "E
 -- I have no idea if half this stuff matters, nor if I'm missing something critical.
 DEFINE_BASECLASS( "mediaplayer_base" )
 
+function GetOriginUP(ent, dir)
+  if(not (ent and ent:IsValid())) then return end
+  local out = ent:OBBCenter()
+  local obb = ent:OBBMaxs(); obb:Sub(ent:OBBMins())
+  return math.abs(obb:Dot(dir) / 2)
+end
+
+local function SetupFace(ply, pos, ent, ang)
+  if(not (ent and ent:IsValid())) then return end
+  local norm, epos = Vector(0,0,1), ent:GetPos()
+  local cang = (ang and Angle(ang) or Angle(0,0,0))
+  local righ = (pos - ply:GetPos()):Cross(norm)
+  local rang = norm:Cross(righ):AngleEx(norm)
+  local tang = ent:AlignAngles(ent:LocalToWorldAngles(cang), rang)
+        tang:Normalize(); tang:RotateAroundAxis(norm, 180)
+  local vobb = ent:OBBCenter(); vobb:Rotate(tang)
+        vobb.x, vobb.y = -vobb.x, -vobb.y -- Revert OBB to position
+        vobb.z = GetOriginUP(ent, ent:WorldToLocal(norm + epos))
+  local tpos = Vector(vobb); tpos:Add(pos)
+  ent:SetAngles(tang); ent:SetPos(tpos) -- Apply
+end
+
 local function AddMediaPlayerModel( name, model, config)
 	if util.IsValidModel( model ) then
 		local spawnName = "../spawnicons/" .. model:sub(1, #model - 4)
