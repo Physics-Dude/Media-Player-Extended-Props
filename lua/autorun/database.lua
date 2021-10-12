@@ -1,8 +1,5 @@
 AddCSLuaFile()
 
--- I have no idea if half this stuff matters, nor if I'm missing something critical.
-DEFINE_BASECLASS( "mediaplayer_base" )
-
 local function GetOffsetUP(ent, dir)
 	if(not (ent and ent:IsValid())) then return end
 	local out = ent:OBBCenter()
@@ -10,18 +7,20 @@ local function GetOffsetUP(ent, dir)
 	return math.abs(obb:Dot(dir) / 2)
 end
 
-local function SetFacePlayer(ply, pos, ent, ang)
+local function SetFacePlayer(ply, ent, nrm, pos, ang)
 	if(not (ent and ent:IsValid())) then return end
-	local norm, epos = Vector(0,0,1), ent:GetPos()
+	local norm, epos = Vector(nrm), ent:GetPos()
+	norm:Normalize() -- Make sure it is normalized
 	local cang = (ang and Angle(ang) or Angle(0,0,0))
 	local righ = (pos - ply:GetPos()):Cross(norm)
 	local rang = norm:Cross(righ):AngleEx(norm)
 	local tang = ent:AlignAngles(ent:LocalToWorldAngles(cang), rang)
-	      tang:Normalize(); tang:RotateAroundAxis(norm, 180)
+	tang:Normalize(); tang:RotateAroundAxis(norm, 180)
 	ent:SetAngles(tang) -- Apply the angle as long as it is ready
-	local vobb = ent:OBBCenter(); vobb:Rotate(tang)
-	      vobb.x, vobb.y = -vobb.x, -vobb.y -- Revert OBB to position
-	      vobb.z = GetOffsetUP(ent, ent:WorldToLocal(norm + epos))
+	local vobb = ent:OBBCenter() -- Revert OBB to position
+	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z
+	local marg = GetOffsetUP(ent, ent:WorldToLocal(norm + epos))
+	vobb:Rotate(tang); vobb:Add(norm * marg)
 	local tpos = Vector(vobb); tpos:Add(pos) -- Use OBB offset
 	ent:SetPos(tpos) -- Apply the calculated position
 end
@@ -894,6 +893,9 @@ if SERVER then
 		local tr = ply:GetEyeTrace()
 		if(not tr) then return end
 		if(not tr.Hit) then return end
-		SetFacePlayer(ply, tr.HitPos, ent, cnf.aface)
+
+		SetFacePlayer(ply, ent, tr.HitNormal, tr.HitPos + tr.HitNormal * 50, cnf.aface)
 	end )
 end
+
+print("LOAD: Media Player - Extended")
