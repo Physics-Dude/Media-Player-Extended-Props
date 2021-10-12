@@ -867,8 +867,8 @@ AddMediaPlayerModel( --Retro
 )
 
 if SERVER then
-	-- Place mediaplayer toward player. this also fixes base mediaplayer behavior. requested by cyan.
-	hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" )
+	-- Place mediaplayer toward player. This also fixes base mediaplayer behavior. requested by cyan.
+	hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" ) -- Remove hook and set a new one
 	hook.Add( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup", function(ply, ent)
 		if(not ent.IsMediaPlayerEntity) then return end
 		local mod = ent:GetModel() -- Model is the list index hash
@@ -890,11 +890,17 @@ if SERVER then
 			if(ply.AdvDupe2.Pasting or ply.AdvDupe2.Downloading) then return end
 		end
 
-		local tr = ply:GetEyeTrace()
-		if(not tr) then return end
-		if(not tr.Hit) then return end
+		-- Make sure we ignore the player and spawned entity for trace
+		local dt = util.GetPlayerTrace(ply) -- Create trace data filtered
+		dt.filter = {ply, ent} -- Otherwise the `ent` hit position is taken
 
-		SetFacePlayer(ply, ent, tr.HitNormal, tr.HitPos + tr.HitNormal * 50, cnf.aface)
+		-- Run the trace with this filter and find real position
+		local tr = util.TraceLine(dt)
+
+		if(not tr) then return end -- Trace does  not exist
+		if(not tr.Hit) then return end -- Trace did not hit anything
+
+		SetFacePlayer(ply, ent, tr.HitNormal, tr.HitPos, cnf.aface)
 	end )
 end
 
