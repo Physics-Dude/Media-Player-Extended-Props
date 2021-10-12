@@ -26,7 +26,7 @@ end
 
 local function AddMediaPlayerModel( name, model, config)
 	if util.IsValidModel( model ) then
-		local spawnName = "../spawnicons/" .. model:sub(1, model:len() - 4)
+		local spawnName = "../spawnicons/"..model:sub(1, -5)
 		list.Set( "SpawnableEntities", spawnName, {
 			PrintName      = name,
 			Spawnable      = true,
