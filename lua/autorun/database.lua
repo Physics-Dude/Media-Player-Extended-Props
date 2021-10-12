@@ -10,19 +10,18 @@ end
 local function SetFacePlayer(ply, ent, nrm, pos, ang)
 	if(not (ent and ent:IsValid())) then return end
 	local norm, epos = Vector(nrm), ent:GetPos()
-	norm:Normalize() -- Make sure it is normalized
+	local vobb = ent:OBBCenter(); norm:Normalize()
 	local cang = (ang and Angle(ang) or Angle(0,0,0))
 	local righ = (pos - ply:GetPos()):Cross(norm)
 	local rang = norm:Cross(righ):AngleEx(norm)
 	local tang = ent:AlignAngles(ent:LocalToWorldAngles(cang), rang)
-	tang:Normalize(); tang:RotateAroundAxis(norm, 180)
-	ent:SetAngles(tang) -- Apply the angle as long as it is ready
-	local vobb = ent:OBBCenter() -- Revert OBB to position
-	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z
+	tang:Normalize(); tang:RotateAroundAxis(norm, 180); ent:SetAngles(tang)
+	-- Apply the angle as long as it is ready and point to position
+	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z -- Rever OBB
 	local marg = GetOffsetUP(ent, ent:WorldToLocal(norm + epos))
-	vobb:Rotate(tang); vobb:Add(norm * marg)
+	vobb:Rotate(tang); vobb:Add(norm * marg) -- Convert to world-space
 	local tpos = Vector(vobb); tpos:Add(pos) -- Use OBB offset
-	ent:SetPos(tpos) -- Apply the calculated position
+	ent:SetPos(tpos) -- Apply the calculated position on the screen
 end
 
 local function AddMediaPlayerModel( name, model, config)
@@ -180,6 +179,7 @@ AddMediaPlayerModel(
 	{
 		angle = Angle(0, 90, 0),
 		offset = Vector(-569.95, 759.45, 3), -- Forward/Back | Left/Right | Up/Down
+		aface = Angle(-90,0,0),
 		width = 1518.9,
 		height = 1139.3
 	}
