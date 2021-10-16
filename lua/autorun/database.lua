@@ -1,24 +1,20 @@
 AddCSLuaFile()
 
-local function GetOffsetUP(ent, dir)
-	if(not (ent and ent:IsValid())) then return end
-	local out = ent:OBBCenter()
-	local obb = ent:OBBMaxs(); obb:Sub(ent:OBBMins())
-	return math.abs(obb:Dot(dir) / 2)
-end
-
-local function SetFacePlayer(ply, ent, nrm, pos, ang)
+local function SetFacePosition(ent, anc, nrm, pos, ang)
 	if(not (ent and ent:IsValid())) then return end
 	local norm, epos = Vector(nrm), ent:GetPos()
 	local vobb = ent:OBBCenter(); norm:Normalize()
 	local cang = (ang and Angle(ang) or Angle(0,0,0))
-	local righ = (pos - ply:GetPos()):Cross(norm)
+	local vpos = (pos and Vector(pos) or Vector())
+	local righ = (vpos - anc):Cross(norm)
 	local rang = norm:Cross(righ):AngleEx(norm)
 	local tang = ent:AlignAngles(ent:LocalToWorldAngles(cang), rang)
 	tang:Normalize(); tang:RotateAroundAxis(norm, 180); ent:SetAngles(tang)
 	-- Apply the angle as long as it is ready and point to position
 	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z -- Rever OBB
-	local marg = GetOffsetUP(ent, ent:WorldToLocal(norm + epos))
+	local drbb = ent:OBBMaxs(); drbb:Sub(ent:OBBMins()) -- Diagonal vector
+	local drdt = ent:WorldToLocal(norm + epos) -- Make the normal vector local
+	local marg = math.abs(drbb:Dot(drdt) / 2) -- Grab half of entity width
 	vobb:Rotate(tang); vobb:Add(norm * marg) -- Convert to world-space
 	local tpos = Vector(vobb); tpos:Add(pos) -- Use OBB offset
 	ent:SetPos(tpos) -- Apply the calculated position on the screen
@@ -900,7 +896,7 @@ if SERVER then
 		if(not tr) then return end -- Trace does  not exist
 		if(not tr.Hit) then return end -- Trace did not hit anything
 
-		SetFacePlayer(ply, ent, tr.HitNormal, tr.HitPos, cnf.aface)
+		SetFacePosition(ent, ply:EyePos(), tr.HitNormal, tr.HitPos, cnf.aface)
 	end )
 end
 
