@@ -20,39 +20,16 @@ local function SetFacePosition(ent, anc, nrm, pos, ang)
 	ent:SetPos(tpos) -- Apply the calculated position on the screen
 end
 
-local function SetupPlayerList(res, dbg)
-	local spawnEnt = list.GetForEdit("SpawnableEntities")
-	local mpConfig = list.GetForEdit("MediaPlayerModelConfigs")
-	for k, v in pairs(spawnEnt) do
-		if(v.Model) then
-			local mod = v.Model
-			local cfg = mpConfig[mod]
-			if(cfg and cfg.extended) then
-				if(dbg) then print("EXT", k, v, mod) end
-				if(res) then
-					spawnEnt[k] = nil
-					mpConfig[mod] = nil
-					if(dbg) then print("DEL", k, mod) end
-				end
-			else
-				print("CFG", k, mod)
-			end
-		else
-			print("OTH", k)
-		end
-	end
-end
-
 local function AddMediaPlayerModel( name, model, config)
 	if util.IsValidModel( model ) then
-		local icon = "materials/spawnicons/"..model:sub(1, -5)..".png"
-		list.Set( "SpawnableEntities", icon, {
+		list.Set( "SpawnableEntities", model, {
 			PrintName      = name,
 			Spawnable      = true,
 			AdminSpawnable = true,
 			DropToFloor    = true,
 			Type           = "anim",
 			Model          = Model(model),
+			IconOverride   = "materials/spawnicons/"..model:sub(1, -5)..".png",
 			Author         = "Physics Dude",
 			KeyValues      = { model = model },
 			ClassName      = "mediaplayer_tv_ext",
@@ -69,17 +46,16 @@ local function AddMediaPlayerModel( name, model, config)
 	end
 end
 
-SetupPlayerList(true, true)
-
 --[[TV-esque models from Garry's Mod "Bulder" props]]--
 AddMediaPlayerModel(
 	"Plate TV (05x075)",
 	"models/hunter/plates/plate05x075.mdl",
 	{
-		angle = Angle(0, 90, 0), -- Screen offset angle according to the base prop
+		angle  = Angle(0, 90, 0), -- Screen offset angle according to the base prop
 		offset = Vector(-12.11, 23.98, 1.75), -- Forward/Back | Left/Right | Up/Down
-		width = 36.09, -- Screen width size for aspect ratio
-		height = 24.22 -- Screen width height for aspect ratio
+		width  = 36.09, -- Screen width size for aspect ratio
+		height = 24.22, -- Screen height size for aspect ratio
+		aface = Angle(-90,0,0) -- Model custom angle for facing the player when spawned
 	}
 )
 AddMediaPlayerModel(
@@ -89,7 +65,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-23.98, 23.97, 1.75),
 		width = 47.95,
-		height = 36.09
+		height = 36.09,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -99,7 +76,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-23.98, 47.7, 1.75),
 		width = 95.4,
-		height = 47.95
+		height = 47.95,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -109,7 +87,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-47.7, 71.42, 1.75),
 		width = 142.85,
-		height = 95.4
+		height = 95.4,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -119,7 +98,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-47.7, 95.15, 1.75),
 		width = 190.3,
-		height = 95.4
+		height = 95.4,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -129,7 +109,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-71.43, 95.15, 1.75),
 		width = 190.3,
-		height = 142.85
+		height = 142.85,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -139,7 +120,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-71.43, 118.87, 1.75),
 		width = 237.75,
-		height = 142.85
+		height = 142.85,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -149,7 +131,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-95.15, 166.32, 1.75),
 		width = 332.65,
-		height = 190.3
+		height = 190.3,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -159,7 +142,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-95.15, 190.05, 1.75),
 		width = 380.1,
-		height = 190.3
+		height = 190.3,
+		aface = Angle(-90,0,0)
 	}
 )
 --[[
@@ -182,7 +166,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-190.05, 379.85, 2.5),
 		width = 759.7,
-		height = 380.1
+		height = 380.1,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -192,7 +177,8 @@ AddMediaPlayerModel(
 		angle = Angle(0, 90, 0),
 		offset = Vector(-379.85, 569.65, 3),
 		width = 1139.3,
-		height = 769.7
+		height = 769.7,
+		aface = Angle(-90,0,0)
 	}
 )
 AddMediaPlayerModel(
@@ -203,7 +189,8 @@ AddMediaPlayerModel(
 		offset = Vector(-569.95, 759.45, 3),
 		aface = Angle(-90,0,0),
 		width = 1518.9,
-		height = 1139.3
+		height = 1139.3,
+		aface = Angle(-90,0,0)
 	}
 )
 --[[
@@ -626,6 +613,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 90, 0),
 		offset = Vector(-3, 3, 1.75),
+		aface = Angle(-90,0,0),
 		width = 6,
 		height = 6
 	}
@@ -636,6 +624,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(6, 3, 1.75),
+		aface = Angle(-90,90,0),
 		width = 12,
 		height = 6
 	}
@@ -646,6 +635,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, -180, 0),
 		offset = Vector(9, 6, 1.75),
+		aface = Angle(-90,90,0),
 		width = 18,
 		height = 12
 	}
@@ -667,6 +657,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(30, 18, 1.75),
+		aface = Angle(-90,90,0),
 		width = 60,
 		height = 36
 	}
@@ -677,6 +668,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(48, 30, 1.75),
+		aface = Angle(-90,90,0),
 		width = 96,
 		height = 60
 	}
@@ -687,6 +679,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(72, 48, 1.75),
+		aface = Angle(-90,90,0),
 		width = 144,
 		height = 96
 	}
@@ -697,6 +690,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(120, 72, 2),
+		aface = Angle(-90,90,0),
 		width = 240,
 		height = 144
 	}
@@ -707,6 +701,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(144, 96, 2),
+		aface = Angle(-90,90,0),
 		width = 288,
 		height = 192
 	}
@@ -717,6 +712,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 180, 0),
 		offset = Vector(192, 120, 2),
+		aface = Angle(-90,90,0),
 		width = 384,
 		height = 240
 	}
@@ -727,6 +723,7 @@ AddMediaPlayerModel( --sprops
 	{
 		angle = Angle(0, 90, 0),
 		offset = Vector(-144, 240, 2),
+		aface = Angle(-90,0,0),
 		width = 480,
 		height = 288
 	}
@@ -925,7 +922,5 @@ if SERVER then
 		SetFacePosition(ent, ply:EyePos(), tr.HitNormal, tr.HitPos, cnf.aface)
 	end )
 end
-
-SetupPlayerList(false, true)
 
 print("LOAD: Media Player - Extended")
