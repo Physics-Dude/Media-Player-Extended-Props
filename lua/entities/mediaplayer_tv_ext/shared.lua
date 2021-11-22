@@ -21,7 +21,7 @@ ENT.AdminSpawnable = true
 ENT.Model = Model( "models/props_lab/huladoll.mdl" )
 list.Set( "MediaPlayerModelConfigs", ENT.Model, {
 		angle = Angle(-90, 90, 0),
-		offset = Vector(0,8,15),-- Forward/Back | Left/Right | Up/Down 
+		offset = Vector(0,8,15),
 		width = 16,
 		height = 9
 } )
