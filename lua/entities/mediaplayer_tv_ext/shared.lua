@@ -4,7 +4,7 @@ AddCSLuaFile()
 
 DEFINE_BASECLASS( "mediaplayer_base" )
 
-ENT.PrintName      = "Test TV"
+ENT.PrintName      = "Development TV"
 ENT.Author         = "Physics Dude"
 ENT.Instructions   = "Right click on the TV to see available Media Player options. "
                     .." Alternatively, press E on the TV to turn it on."
@@ -13,7 +13,7 @@ ENT.Type           = "anim"
 ENT.Information    = "Development TV"
 ENT.Base           = "mediaplayer_base"
 ENT.RenderGroup    = RENDERGROUP_BOTH
-ENT.Spawnable      = false
+ENT.Spawnable      = true
 ENT.AdminSpawnable = true
 
 --[[--------------------- MAGIC sauce for testing new models rapidly  -----------------------]]--
