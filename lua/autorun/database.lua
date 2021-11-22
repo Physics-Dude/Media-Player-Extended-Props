@@ -885,6 +885,30 @@ AddMediaPlayerModel( --Retro
 	}
 )
 
+--[[TV-esque models from "[HALF-LIFE: ALYX] HL:A Computer Prop pack." pack]]--
+AddMediaPlayerModel( --ALYX
+	"(HL:A) Monitor",
+	"models/hlaofficeprops/server_08.mdl",
+	{
+		angle = Angle(0, 180, 84.5),
+		offset = Vector(6.5,-8,14.2),
+		width = 13,
+		height = 9,
+		aface = Angle(0,90,0) 
+	}
+)
+AddMediaPlayerModel( --ALYX
+	"(HL:A) Monitor Dirty",
+	"models/hlaofficeprops/server_08_dirty.mdl",
+	{
+		angle = Angle(0, 180, 84.5),
+		offset = Vector(6.5,-8,14.2),
+		width = 13,
+		height = 9,
+		aface = Angle(0,90,0) 
+	}
+)
+
 if SERVER then
 	-- Place mediaplayer toward player. This also fixes base mediaplayer behavior. requested by cyan.
 	hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" ) -- Remove hook and set a new one
