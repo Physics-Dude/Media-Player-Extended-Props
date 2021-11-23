@@ -11,7 +11,8 @@ mounted Source games, and other workshop addons!
 
 ### Requirements:
 1. This extension needs the [base addon][ref-repo-base] to work so you can subscribe to it [here][ref-base].
-2. The media player currently works only on `Chromium x64` branch for the game.
+2. The media player currently works only on [`Chromium x64`][ref-def-sw] branch of the game.
+You can follow the development in [the official discord thead][ref-gmod-dc].
 
 ### Installation
 You can clone this repository in your addons folder or subscribe to it [here][ref-mpext].
@@ -46,3 +47,5 @@ Note: If you are missing some spawn icons for these addons, be sure to render th
 [ref-repo-base]: https://github.com/samuelmaddock/gm-mediaplayer
 [ref-mpext]: https://steamcommunity.com/sharedfiles/filedetails/?id=2546524440
 [ref-fix]: https://i.imgur.com/ay8wpNd.png
+[ref-def-sw]: https://steamcommunity.com/linkfilter/?url=https://wiki.facepunch.com/gmod/Dev_Branch
+[ref-gmod-dc]: https://steamcommunity.com/linkfilter/?url=https://discordapp.com/invite/gmod
