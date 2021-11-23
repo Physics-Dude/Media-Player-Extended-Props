@@ -29,18 +29,18 @@ When you are new to the media player or the videos are not loading
  * Pixel-perfect alignment (i spent a lot of time aligning each screen. please like it and share.)
 
 ### Supported Addons (not required):
- * Wiremod - LINK
- * SProps - LINK
- * [Final] Steventechno's Electronics Pack! - LINK
- * RolePlay Props Extended - LINK
- * Fallout 4 Devices Pack - LINK
- * 1950s Prop packs - LINK
- * Retro Television - LINK
- * HL:A Computer Prop pack - LINK 
+ * [Wiremod](https://steamcommunity.com/workshop/filedetails/?id=160250458)
+ * [SProps](https://steamcommunity.com/sharedfiles/filedetails/?id=173482196)
+ * [Steventechno's Electronics Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=111517484)
+ * [RolePlay Props Extended](https://steamcommunity.com/sharedfiles/filedetails/?id=1246554779)
+ * [Fallout 4 Devices Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=2376740529)
+ * [1950s Prop packs](https://steamcommunity.com/workshop/filedetails/?id=663134543)
+ * [Retro Television](https://steamcommunity.com/sharedfiles/filedetails/?id=2107060499)
+ * [HL:A Computer Prop pack](https://steamcommunity.com/sharedfiles/filedetails/?id=2651929452)
 
 Suggest new addons or props to support in the comments!
 
-Note: If you are missing some spawn icons for these addons, be sure to render the prop's icon first by simply visiting it in your prop spawnmenu. 
+Note: If you are missing some spawn icons for these addons, be sure to render the prop's icon first by simply visiting it in your prop spawnmenu.
 
 [ref-base]: https://steamcommunity.com/sharedfiles/filedetails/?id=546392647
 [ref-repo-base]: https://github.com/samuelmaddock/gm-mediaplayer
