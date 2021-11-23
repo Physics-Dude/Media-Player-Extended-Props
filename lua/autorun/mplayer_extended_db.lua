@@ -11,7 +11,7 @@ local function SetFacePosition(ent, anc, nrm, pos, ang)
 	local tang = ent:AlignAngles(ent:LocalToWorldAngles(cang), rang)
 	tang:Normalize(); tang:RotateAroundAxis(norm, 180); ent:SetAngles(tang)
 	-- Apply the angle as long as it is ready and point to position
-	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z -- Rever OBB
+	vobb.x, vobb.y, vobb.z = -vobb.x, -vobb.y, -vobb.z -- Reverse OBB
 	local drbb = ent:OBBMaxs(); drbb:Sub(ent:OBBMins()) -- Diagonal vector
 	local drdt = ent:WorldToLocal(norm + epos) -- Make the normal vector local
 	local marg = math.abs(drbb:Dot(drdt) / 2) -- Grab half of entity width
