@@ -28,7 +28,6 @@ local function AddMediaPlayerModel( name, model, config)
 			AdminSpawnable = true,
 			DropToFloor    = true,
 			Type           = "anim",
-			Model          = Model(model),
 			IconOverride   = "materials/spawnicons/"..model:sub(1, -5)..".png",
 			Author         = "Physics Dude",
 			KeyValues      = { model = model },
@@ -894,7 +893,7 @@ AddMediaPlayerModel( --ALYX
 		offset = Vector(6.5,-8,14.2),
 		width = 13,
 		height = 9,
-		aface = Angle(0,90,0) 
+		aface = Angle(0,90,0)
 	}
 )
 AddMediaPlayerModel( --ALYX
@@ -905,7 +904,7 @@ AddMediaPlayerModel( --ALYX
 		offset = Vector(6.5,-8,14.2),
 		width = 13,
 		height = 9,
-		aface = Angle(0,90,0) 
+		aface = Angle(0,90,0)
 	}
 )
 
