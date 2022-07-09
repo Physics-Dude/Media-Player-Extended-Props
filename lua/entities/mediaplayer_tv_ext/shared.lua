@@ -16,10 +16,9 @@ ENT.Editable       = true
 ENT.Spawnable      = true
 ENT.AdminSpawnable = true
 ENT.RenderGroup    = RENDERGROUP_BOTH
-
 ENT.Information    = ENT.PrintName
 
---[[--------------------- MAGIC sauce for testing new models rapidly  -----------------------]]--
+-- MAGIC sauce for testing new models rapidly
 
 ENT.Model = Model( "models/props_lab/huladoll.mdl" )
 list.Set( "MediaPlayerModelConfigs", ENT.Model, {
@@ -29,7 +28,7 @@ list.Set( "MediaPlayerModelConfigs", ENT.Model, {
     height = 9
 } )
 
---[[------------------- END MAGIC sauce for testing new models rapidly -----------------------]]--
+-- END MAGIC sauce for testing new models rapidly
 
 function ENT:SetupDataTables()
   self:NetworkVar("String", 0, "MediaPlayerID", {
@@ -72,7 +71,7 @@ else -- CLIENT
   local textscale, align = 700, TEXT_ALIGN_CENTER
 
   AddHTMLMaterialStyle( artstyle, {
-    width  = 720, height = 480
+    width = 720, height = 480
   }, HTMLMAT_STYLE_BLUR )
 
   function ENT:DrawMediaPlayerOff()
@@ -90,7 +89,7 @@ else -- CLIENT
     cam.End3D2D()
 
     cam.Start3D2D( pos, ang, sca )
-      local tw, th = w / sca, h / sca
+      local tw, th = (w / sca), (h / sca)
       draw.SimpleText( "Press E to begin watching", "MediaTitle",
         tw / 2, th / 2, color_white, align, align )
     cam.End3D2D()
