@@ -35,7 +35,7 @@ function ENT:SetupDataTables()
     KeyName = string.lower("MediaPlayerID"),
     Edit = {
       category     = "Internals",
-      order        = 0,
+      order        = 1,
       enabled      = false,
       waitforenter = true,
       type         = "Generic"
@@ -45,7 +45,7 @@ function ENT:SetupDataTables()
     KeyName = string.lower("MediaThumbnail"),
     Edit = {
       category     = "Internals",
-      order        = 1,
+      order        = 2,
       enabled      = false,
       waitforenter = true,
       type         = "Generic"
@@ -79,7 +79,7 @@ else -- CLIENT
     local thumbnail, sca = self:GetMediaThumbnail(), (w / textscale)
 
     cam.Start3D2D( pos, ang, 1 )
-      if varthumb:GetBool() and thumbnail != "" then
+      if varthumb:GetBool() and thumbnail ~= "" then
         DrawHTMLMaterial( thumbnail, artstyle, w, h )
       else
         surface.SetDrawColor( color_white )
