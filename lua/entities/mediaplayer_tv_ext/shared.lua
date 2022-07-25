@@ -26,7 +26,7 @@ list.Set( "MediaPlayerModelConfigs", ENT.Model, {
     offset = Vector(0,8,15),
     width  = 16,
     height = 9
-} )
+})
 
 -- END MAGIC sauce for testing new models rapidly
 
@@ -101,7 +101,7 @@ else -- CLIENT
     local mp = self:GetMediaPlayer()
 
     if mp then
-      mp:Draw(w, h)
+      mp:Draw()
     else
       self:DrawMediaPlayerOff()
     end
