@@ -977,7 +977,7 @@ AddMediaPlayerModel( --ALYX
 )
 
 if SERVER then
-  -- Place mediaplayer toward player. This also fixes base mediaplayer behavior. requested by cyan.
+  -- Place mediaplayer toward player. This also fixes base mediaplayer behavior. Requested by Cyan.
   hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" ) -- Remove hook and set a new one
   hook.Add( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup", function(ply, ent)
     if(not ent) then return end -- Skip missing entities from triggering spawns
@@ -1009,11 +1009,11 @@ if SERVER then
     -- Run the trace with this filter and find real spawn position
     local tr = util.TraceLine(dt) -- Does not belong on the spawn entity
 
-    if(not tr) then return end -- Trace does  not exist
+    if(not tr) then return end -- Trace does not exist
     if(not tr.Hit) then return end -- Trace did not hit anything
 
     SetFacePosition(ent, ply:EyePos(), tr.HitNormal, tr.HitPos, cnf.aface)
-  end )
+  end)
 end
 
 print("LOAD: Media Player - Extended")
