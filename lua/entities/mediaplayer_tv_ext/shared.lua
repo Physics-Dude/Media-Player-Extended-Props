@@ -36,7 +36,7 @@ function ENT:SetupDataTables()
     Edit = {
       category     = "Internals",
       order        = 1,
-      enabled      = false,
+      readonly     = true,
       waitforenter = true,
       type         = "Generic"
   }})
@@ -46,7 +46,7 @@ function ENT:SetupDataTables()
     Edit = {
       category     = "Internals",
       order        = 2,
-      enabled      = false,
+      readonly     = true,
       waitforenter = true,
       type         = "Generic"
   }})
