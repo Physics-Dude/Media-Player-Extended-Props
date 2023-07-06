@@ -1,5 +1,11 @@
 AddCSLuaFile()
 
+if(not MediaPlayer) then
+  ErrorNoHalt( "MP-Extended [DBA]: Base media player not loaded!\n" )
+  ErrorNoHalt( "MP-Extended [DBA]: https://github.com/samuelmaddock/gm-mediaplayer\n" )
+  return
+end
+
 local function SetFacePosition(ent, anc, nrm, pos, ang)
   if(not (ent and ent:IsValid())) then return end
   local norm, epos = Vector(nrm), ent:GetPos()

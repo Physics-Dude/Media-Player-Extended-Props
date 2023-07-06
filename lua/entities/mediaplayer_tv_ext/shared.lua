@@ -2,6 +2,12 @@
 
 AddCSLuaFile()
 
+if(not MediaPlayer) then
+  ErrorNoHalt( "MP-Extended [ENT]: Base media player not loaded!\n" )
+  ErrorNoHalt( "MP-Extended [ENT]: https://github.com/samuelmaddock/gm-mediaplayer\n" )
+  return
+end
+
 DEFINE_BASECLASS( "mediaplayer_base" )
 
 ENT.PrintName      = "Media player extended TV"
@@ -41,25 +47,59 @@ function ENT:SetupDataTables()
       type         = "Generic"
   }})
 
-  self:NetworkVar("String", 1, "MediaThumbnail", {
-    KeyName = string.lower("MediaThumbnail"),
+  self:NetworkVar("String", 1, "MediaTitle", {
+    KeyName = string.lower("MediaTitle"),
     Edit = {
-      category     = "Internals",
+      category     = "Media",
       order        = 2,
       readonly     = true,
       waitforenter = true,
       type         = "Generic"
   }})
+
+  self:NetworkVar("String", 2, "MediaURL", {
+    KeyName = string.lower("MediaURL"),
+    Edit = {
+      category     = "Media",
+      order        = 3,
+      readonly     = true,
+      waitforenter = true,
+      type         = "Generic"
+  }})
+
+  self:NetworkVar("String", 3, "MediaThumbnail", {
+    KeyName = string.lower("MediaThumbnail"),
+    Edit = {
+      category     = "Media",
+      order        = 4,
+      readonly     = true,
+      waitforenter = true,
+      type         = "Generic"
+  }})
+
 end
 
 if SERVER then
 
-  function ENT:SetupMediaPlayer( mp )
-    mp:on("mediaChanged", function(media) self:OnMediaChanged(media) end)
+  function ENT:OnMediaChanged( media )
+    if( media ) then
+      self:SetMediaURL(tostring( media.url or "" ))
+      if(media._metadata) then
+        self:SetMediaTitle(tostring( media._metadata.title or "" ))
+        self:SetMediaThumbnail(tostring( media._metadata.thumbnail or "" ))
+      else
+        self:SetMediaTitle( "N/A" )
+        self:SetMediaThumbnail( "N/A" )
+      end
+    else
+      self:SetMediaURL( "N/A" )
+      self:SetMediaTitle( "N/A" )
+      self:SetMediaThumbnail( "N/A" )
+    end
   end
 
-  function ENT:OnMediaChanged( media )
-    self:SetMediaThumbnail( media and media:Thumbnail() or "" )
+  function ENT:SetupMediaPlayer( mp )
+    mp:on("mediaChanged", function(media) self:OnMediaChanged(media) end)
   end
 
 else -- CLIENT
