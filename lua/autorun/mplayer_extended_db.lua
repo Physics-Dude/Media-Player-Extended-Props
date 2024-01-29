@@ -982,6 +982,42 @@ AddMediaPlayerModel( --ALYX
   }
 )
 
+
+-- Models from Snowdrop Escape --
+AddMediaPlayerModel( --Soviet Lab
+  "(Soviet Lab) Monitor 7",
+  "models/props_se/propper/power_monitor_7.mdl",
+  {
+    angle  = Angle(0, 90, 82.5),
+    offset = Vector(9.8,9,22.5),
+    width  = 18,
+    height = 15,
+    aface  = Angle(0,90,0)
+  }
+)
+AddMediaPlayerModel( --Soviet Lab
+  "(Soviet Lab) Monitor 5",
+  "models/props_se/propper/power_monitor_5.mdl",
+  {
+    angle  = Angle(0, 90, 85),
+    offset = Vector(4.5,9.5,11.3),
+    width  = 24,
+    height = 15,
+    aface  = Angle(0,90,0)
+  }
+)
+AddMediaPlayerModel( --Soviet Lab
+  "(Soviet Lab) Monitor 4",
+  "models/props_se/propper/power_monitor_4.mdl",
+  {
+    angle  = Angle(0, 0, 90),
+    offset = Vector(-9,6.5,9),
+    width  = 18.5,
+    height = 18,
+    aface  = Angle(0,90,0)
+  }
+)
+
 if SERVER then
   -- Place mediaplayer toward player. This also fixes base mediaplayer behavior. Requested by Cyan.
   hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" ) -- Remove hook and set a new one
