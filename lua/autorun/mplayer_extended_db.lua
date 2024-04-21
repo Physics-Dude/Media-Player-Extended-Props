@@ -1018,6 +1018,41 @@ AddMediaPlayerModel( --Soviet Lab
   }
 )
 
+-- Models from Mobile Computing Pack --
+AddMediaPlayerModel( --Mobile Computing Pack
+  "(Mobile Computing) Cellphone",
+  "models/lt_c/tech/cellphone.mdl",
+  {
+    angle  = Angle(0, 180, 0),
+    offset = Vector(2.4,1.3,0.5),
+    width  = 5,
+    height = 2.7,
+    aface  = Angle(0,90,0)
+  }
+)
+AddMediaPlayerModel( --Mobile Computing Pack
+  "(Mobile Computing) Tablet",
+  "models/lt_c/tech/tablet_civ.mdl",
+  {
+    angle  = Angle(0, 90, 0),
+    offset = Vector(-3.5,5.3,0.3),
+    width  = 10,
+    height = 7,
+    aface  = Angle(0,90,0)
+  }
+)
+AddMediaPlayerModel( --Mobile Computing Pack
+  "(Mobile Computing) Tablet2",
+  "models/nirrti/tablet/tablet_sfm.mdl",
+  {
+    angle  = Angle(0, 180, 0),
+    offset = Vector(4.7,3.5,1.3),
+    width  = 10,
+    height = 7,
+    aface  = Angle(0,90,0)
+  }
+)
+
 if SERVER then
   -- Place mediaplayer toward player. This also fixes base mediaplayer behavior. Requested by Cyan.
   hook.Remove( "PlayerSpawnedSENT", "MediaPlayer.Extended.Setup" ) -- Remove hook and set a new one
