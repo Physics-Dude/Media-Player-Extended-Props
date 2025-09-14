@@ -28,6 +28,8 @@ When you are new to the media player or the videos are not loading
  * More third-party props added over time
  * A Microwave
  * Pixel-perfect alignment (i spent a lot of time aligning each screen. please like it and share.)
+ * .FGD file to allow map makers to spawn custom media players in their maps via Hammer editor (thanks nailuj9002)
+
 
 ### Supported Addons (not required):
  * [Wiremod](https://steamcommunity.com/workshop/filedetails/?id=160250458)
